@@ -5,6 +5,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
 /**
  * @author mina
  * Traverse2DArray A class for travering 2D array and return traversed elements as String
@@ -21,6 +22,7 @@ public class Traverse2DArray {
 
 	/**
 	 * Traverse 2D input array and return traversed elements as String.
+	 *
 	 * @param input2dArray is a 2D array ,for example {{1,2,3},{4,5,6}}.
 	 * @return EMPTY if the 2D array param is null or empty, otherwise return traversed elements as String
 	 */
@@ -29,48 +31,44 @@ public class Traverse2DArray {
 		if (input2dArray == null || input2dArray.length == 0) {
 			return EMPTY;
 		}
-		// Check if there is only one row in the given 2d array.
-		if (input2dArray.length == 1) {
-			return printResult(Arrays.asList(input2dArray[0]));
-		}
 		// Define and Initialize the boundary of the 2d array.
-		int beginRow = 0, beginCol = 0;
-		int endRow = input2dArray.length - 1, endCol = input2dArray[0].length - 1;
+		int topRow = 0, leftCol = 0;
+		int bottomRow = input2dArray.length - 1, rightCol = input2dArray[0].length - 1;
 
 		// List for adding traversed elements.
 		List<Integer> result = new ArrayList<>();
 
-		while (beginRow <= endRow && beginCol <= endCol) {
-			int startColIndex = beginCol, startRowIndex = beginRow + 1;
-			int endRowIndex = endRow - 1, endColIndex = endCol - 1;
+		while (topRow <= bottomRow && leftCol <= rightCol) {
+			int startColIndex = leftCol, endColIndex = rightCol - 1;
+			int startRowIndex = topRow + 1, endRowIndex = bottomRow - 1;
 
-			//This Loop for traversing the first row from left to right.
-			while (startColIndex <= endCol) {
-				result.add(input2dArray[beginRow][startColIndex]);
+			//This Loop for traversing from left to right.
+			while (startColIndex <= rightCol) {
+				result.add(input2dArray[topRow][startColIndex]);
 				startColIndex++;
 			}
 
-			//This Loop for traversing the last column from top to down.
-			while (startRowIndex <= endRow) {
-				result.add(input2dArray[startRowIndex][endCol]);
+			//This Loop for traversing from top to down.
+			while (startRowIndex <= bottomRow) {
+				result.add(input2dArray[startRowIndex][rightCol]);
 				startRowIndex++;
 			}
 
-			//This Loop for traversing the last row from right to left.
-			while (endColIndex >= beginCol && beginRow != endRow) {
-				result.add(input2dArray[endRow][endColIndex]);
+			//This Loop for traversing from right to left.
+			while (endColIndex >= leftCol && topRow != bottomRow) {
+				result.add(input2dArray[bottomRow][endColIndex]);
 				endColIndex--;
 			}
 
-			//This Loop for traversing the first column from down to top.
-			while (endRowIndex > beginRow && beginCol != endCol) {
-				result.add(input2dArray[endRowIndex][beginCol]);
+			//This Loop for traversing from down to top.
+			while (endRowIndex > topRow && leftCol != rightCol) {
+				result.add(input2dArray[endRowIndex][leftCol]);
 				endRowIndex--;
 			}
-			beginCol++;
-			beginRow++;
-			endCol--;
-			endRow--;
+			leftCol++;
+			topRow++;
+			rightCol--;
+			bottomRow--;
 		}
 		return printResult(result);
 	}

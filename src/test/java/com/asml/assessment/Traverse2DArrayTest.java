@@ -162,7 +162,7 @@ class Traverse2DArrayTest {
 	}
 
 	private static Integer[][] testCase15() {
-		final int numberOfRowsAndCols = 10000;
+		final int numberOfRowsAndCols = 1000;
 		Integer[][] testData = new Integer[numberOfRowsAndCols][numberOfRowsAndCols];
 		for (int i = 0; i < numberOfRowsAndCols; i++) {
 			for (int j = 0; j < numberOfRowsAndCols; j++) {
